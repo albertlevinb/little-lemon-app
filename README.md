@@ -2,6 +2,9 @@
 
 A modern, responsive React application for restaurant table reservations with a clean UI and comprehensive form validation.
 
+## Screenshot
+<img width="1920" height="935" alt="image" src="https://github.com/user-attachments/assets/aab2991f-d7b6-411e-882d-0cb4ee883455" />
+
 ## Features
 
 ### 🍋 Core Functionality

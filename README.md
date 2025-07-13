@@ -29,3 +29,6 @@ A modern, responsive React application for restaurant table reservations with a 
 - **Tailwind CSS**: Utility-first CSS framework for styling
 - **Lucide React**: Icon library for UI elements
 - **JavaScript**: ES6+ features and modern syntax
+
+## About
+Built as part of the Meta Front-End Developer Specialization on Coursera, demonstrating proficiency in modern React development practices.

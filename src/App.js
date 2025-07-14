@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Phone, Mail, Utensils, Star, MapPin, ChefHat, Award, Home, BookOpen, Menu as MenuIcon } from 'lucide-react';
-import BookingPage from './BookingPage';
+import BookingPage from './components/BookingPage';
 
 const LittleLemonWebsite = () => {
   const [currentPage, setCurrentPage] = useState('home');

@@ -23,18 +23,16 @@ A modern, responsive React application for restaurant table reservations with a 
 - **Additional Options**: Special occasion selection and custom requests
 - **Validation**: Real-time error checking and user feedback
 
-## Home Page
-The **Home Page** serves as the landing page for users to easily navigate the booking system. It provides quick access to:
+## Screenshots
 
-- **Book a Table**: A clear call-to-action for users to begin the reservation process
-- **Restaurant Overview**: Brief details about Little Lemon restaurant, its ambiance, and services
-- **Menu Preview**: A glimpse of the restaurant's featured dishes or categories (e.g., appetizers, mains, desserts)
+### 🏠 Home Page
+<img width="1920" height="935" alt="Screenshot 2025-07-17 at 5 59 06 PM" src="https://github.com/user-attachments/assets/f064f2fb-005a-401e-99d1-36c916e7618a" />
 
-## Menu
-The **Menu** section of the app allows customers to:
+### 🍽️ Menu Page
+<img width="1920" height="935" alt="Screenshot 2025-07-17 at 5 59 28 PM" src="https://github.com/user-attachments/assets/2e44b672-5b55-4f1d-be1a-659dd953777f" />
 
-- **Browse Dishes**: Users can view different categories of food, from appetizers to desserts
-- **Dish Details**: Each dish includes a brief description, ingredients, and pricing
+### 📋 Booking Form
+<img width="1920" height="935" alt="Screenshot 2025-07-17 at 5 59 40 PM" src="https://github.com/user-attachments/assets/40028a76-038d-46d3-a2d5-2fe8726638e9" />
 
 ## Technology Stack
 

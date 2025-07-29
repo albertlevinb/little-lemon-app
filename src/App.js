@@ -321,7 +321,7 @@ const LittleLemonWebsite = () => {
                 description: "Variety of appetizers and dips"
               },
               {
-                image: "https://plus.unsplash.com/premium_photo-1667545932065-59f39c4f2c?q=80&w=1173&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                image: "https://images.unsplash.com/photo-1619810816513-2484647eef43?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                 title: "Grilled Lamb",
                 description: "Tender lamb with Mediterranean spices"
               }

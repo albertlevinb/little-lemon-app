@@ -2,6 +2,8 @@
 
 A modern, responsive React application for restaurant table reservations with a clean UI and comprehensive form validation.
 
+[Live Demo](https://little-lemon-reservations.netlify.app)
+
 ## Features
 
 ### 🍋 Core Functionality

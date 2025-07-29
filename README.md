@@ -49,7 +49,7 @@ This app uses [Supabase](https://supabase.com) as a real-time backend to manage 
 <img width="1920" height="935" alt="Screenshot 2025-07-17 at 5 59 28 PM" src="https://github.com/user-attachments/assets/2e44b672-5b55-4f1d-be1a-659dd953777f" />
 
 ### 📋 Booking Form
-<img width="1920" height="935" alt="Screenshot 2025-07-17 at 5 59 40 PM" src="https://github.com/user-attachments/assets/40028a76-038d-46d3-a2d5-2fe8726638e9" />
+<img width="1920" height="925" alt="Screenshot 2025-07-29 at 4 59 42 PM" src="https://github.com/user-attachments/assets/adf6a6ec-dde5-49b2-8d7f-52fbe0e8bf8d" />
 
 ## Technology Stack
 

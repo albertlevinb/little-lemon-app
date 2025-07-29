@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { supabase } from './supabaseClient';
 import { Phone, Mail, Utensils, Star, MapPin, ChefHat, Award, Home, BookOpen, Menu as MenuIcon } from 'lucide-react';
 import BookingPage from './components/BookingPage';
 
@@ -18,6 +19,7 @@ const LittleLemonWebsite = () => {
   const [bookings, setBookings] = useState([]);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false); // Add loading state
 
   const timeSlots = [
     '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM',
@@ -53,6 +55,25 @@ const LittleLemonWebsite = () => {
     ]
   };
 
+  // Load bookings from Supabase on component mount
+  useEffect(() => {
+    fetchBookings();
+  }, []);
+
+  const fetchBookings = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('bookings')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setBookings(data || []);
+    } catch (error) {
+      console.error('Error fetching bookings:', error);
+    }
+  };
+
   const getAvailableSlots = (selectedDate) => {
     const bookedSlots = bookings
       .filter(booking => booking.date === selectedDate)
@@ -79,29 +100,53 @@ const LittleLemonWebsite = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!validateForm()) return;
 
-    const newBooking = {
-      ...bookingData,
-      id: Date.now(),
-      timestamp: new Date().toISOString()
-    };
+    setLoading(true);
 
-    setBookings([...bookings, newBooking]);
-    setShowConfirmation(true);
+    try {
+      // Insert booking into Supabase
+      const { data, error } = await supabase
+        .from('bookings')
+        .insert([{
+          name: bookingData.name,
+          email: bookingData.email,
+          phone: bookingData.phone,
+          date: bookingData.date,
+          time: bookingData.time,
+          guests: bookingData.guests,
+          occasion: bookingData.occasion || null,
+          requests: bookingData.requests || null
+        }])
+        .select()
+        .single();
 
-    setBookingData({
-      name: '',
-      email: '',
-      phone: '',
-      date: '',
-      time: '',
-      guests: 2,
-      occasion: '',
-      requests: ''
-    });
-    setErrors({});
+      if (error) throw error;
+
+      // Add new booking to local state
+      setBookings(prev => [data, ...prev]);
+      setShowConfirmation(true);
+
+      // Reset form
+      setBookingData({
+        name: '',
+        email: '',
+        phone: '',
+        date: '',
+        time: '',
+        guests: 2,
+        occasion: '',
+        requests: ''
+      });
+      setErrors({});
+
+    } catch (error) {
+      console.error('Error creating booking:', error);
+      alert('There was an error creating your booking. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleInputChange = (field, value) => {
@@ -276,7 +321,7 @@ const LittleLemonWebsite = () => {
                 description: "Variety of appetizers and dips"
               },
               {
-                image: "https://plus.unsplash.com/premium_photo-1667545932065-59f39c3c4f2c?q=80&w=1173&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                image: "https://plus.unsplash.com/premium_photo-1667545932065-59f39c4f2c?q=80&w=1173&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                 title: "Grilled Lamb",
                 description: "Tender lamb with Mediterranean spices"
               }
@@ -484,6 +529,7 @@ const LittleLemonWebsite = () => {
           bookings={bookings}
           availableSlots={availableSlots}
           occasions={occasions}
+          loading={loading} // Pass loading state
         />
       )}
     </div>

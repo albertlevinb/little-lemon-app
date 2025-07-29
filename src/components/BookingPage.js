@@ -1,4 +1,4 @@
-import { Calendar, Clock, Users, Phone, Mail, CheckCircle, AlertCircle } from 'lucide-react';
+import { Calendar, Clock, Users, Phone, Mail, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 
 export default function BookingPage({
   bookingData,
@@ -10,7 +10,8 @@ export default function BookingPage({
   setShowConfirmation,
   bookings,
   availableSlots,
-  occasions
+  occasions,
+  loading = false // Add loading prop with default value
 }) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-green-50">
@@ -68,8 +69,9 @@ export default function BookingPage({
                       type="text"
                       value={bookingData.name}
                       onChange={(e) => handleInputChange('name', e.target.value)}
+                      disabled={loading}
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-colors ${errors.name ? 'border-red-500' : 'border-gray-300'
-                        }`}
+                        } ${loading ? 'bg-gray-100 cursor-not-allowed' : ''}`}
                       placeholder="Enter your full name"
                     />
                     {errors.name && (
@@ -90,8 +92,9 @@ export default function BookingPage({
                         type="email"
                         value={bookingData.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
+                        disabled={loading}
                         className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-colors ${errors.email ? 'border-red-500' : 'border-gray-300'
-                          }`}
+                          } ${loading ? 'bg-gray-100 cursor-not-allowed' : ''}`}
                         placeholder="your@email.com"
                       />
                     </div>
@@ -114,8 +117,9 @@ export default function BookingPage({
                       type="tel"
                       value={bookingData.phone}
                       onChange={(e) => handleInputChange('phone', e.target.value)}
+                      disabled={loading}
                       className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-colors ${errors.phone ? 'border-red-500' : 'border-gray-300'
-                        }`}
+                        } ${loading ? 'bg-gray-100 cursor-not-allowed' : ''}`}
                       placeholder="(123) 456-7890"
                     />
                   </div>
@@ -138,9 +142,11 @@ export default function BookingPage({
                       value={bookingData.date}
                       onChange={(e) => handleInputChange('date', e.target.value)}
                       min={getTomorrowDate()}
+                      disabled={loading}
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-colors ${errors.date ? 'border-red-500' : 'border-gray-300'
-                        }`}
+                        } ${loading ? 'bg-gray-100 cursor-not-allowed' : ''}`}
                     />
+                    <p className="text-xs text-gray-500 mt-1">Same-day bookings are not available.</p>
                     {errors.date && (
                       <p className="text-red-500 text-sm mt-1 flex items-center">
                         <AlertCircle className="w-4 h-4 mr-1" />
@@ -158,8 +164,9 @@ export default function BookingPage({
                       <select
                         value={bookingData.time}
                         onChange={(e) => handleInputChange('time', e.target.value)}
+                        disabled={loading}
                         className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-colors ${errors.time ? 'border-red-500' : 'border-gray-300'
-                          }`}
+                          } ${loading ? 'bg-gray-100 cursor-not-allowed' : ''}`}
                       >
                         <option value="">Select time</option>
                         {availableSlots.map(slot => (
@@ -186,8 +193,9 @@ export default function BookingPage({
                       <select
                         value={bookingData.guests}
                         onChange={(e) => handleInputChange('guests', parseInt(e.target.value))}
+                        disabled={loading}
                         className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-colors ${errors.guests ? 'border-red-500' : 'border-gray-300'
-                          }`}
+                          } ${loading ? 'bg-gray-100 cursor-not-allowed' : ''}`}
                       >
                         {[...Array(12)].map((_, i) => (
                           <option key={i + 1} value={i + 1}>
@@ -211,7 +219,9 @@ export default function BookingPage({
                     <select
                       value={bookingData.occasion}
                       onChange={(e) => handleInputChange('occasion', e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-colors"
+                      disabled={loading}
+                      className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-colors ${loading ? 'bg-gray-100 cursor-not-allowed' : ''
+                        }`}
                     >
                       <option value="">Select occasion</option>
                       {occasions.map(occasion => (
@@ -229,16 +239,29 @@ export default function BookingPage({
                     value={bookingData.requests}
                     onChange={(e) => handleInputChange('requests', e.target.value)}
                     rows="3"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-colors"
+                    disabled={loading}
+                    className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-colors ${loading ? 'bg-gray-100 cursor-not-allowed' : ''
+                      }`}
                     placeholder="Any dietary restrictions, seating preferences, or special requests..."
                   />
                 </div>
 
                 <button
                   onClick={handleSubmit}
-                  className="w-full bg-yellow-400 hover:bg-yellow-500 text-green-800 font-semibold py-4 px-6 rounded-lg transition-colors transform hover:scale-105"
+                  disabled={loading}
+                  className={`w-full font-semibold py-4 px-6 rounded-lg transition-all transform ${loading
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    : 'bg-yellow-400 hover:bg-yellow-500 text-green-800 hover:scale-105'
+                    }`}
                 >
-                  Reserve Table
+                  {loading ? (
+                    <div className="flex items-center justify-center">
+                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                      Creating Reservation...
+                    </div>
+                  ) : (
+                    'Reserve Table'
+                  )}
                 </button>
               </div>
             </div>
@@ -261,7 +284,7 @@ export default function BookingPage({
               <div className="bg-white rounded-2xl shadow-xl p-6">
                 <h3 className="text-xl font-bold text-gray-800 mb-4">Recent Bookings</h3>
                 <div className="space-y-3 max-h-64 overflow-y-auto">
-                  {bookings.slice(-5).reverse().map(booking => (
+                  {bookings.slice(0, 5).map(booking => (
                     <div key={booking.id} className="bg-gray-50 rounded-lg p-3">
                       <div className="flex justify-between items-start">
                         <div>

@@ -23,6 +23,21 @@ A modern, responsive React application for restaurant table reservations with a 
 - **Additional Options**: Special occasion selection and custom requests
 - **Validation**: Real-time error checking and user feedback
 
+## 🔗 Supabase Backend Integration
+
+This app uses [Supabase](https://supabase.com) as a real-time backend to manage bookings securely and efficiently.
+
+### 🛠️ Backend Features
+- **Database Integration**: Bookings are stored in a Supabase PostgreSQL table
+- **Row-Level Security (RLS)**: Enabled with custom policies to allow public inserts and read-only access
+- **API Calls**: Booking data is submitted securely via Supabase client libraries
+- **Validation & Error Handling**: Frontend gracefully handles backend errors (e.g., booking conflicts or policy violations)
+
+### 🔐 RLS Policies Summary
+- ✅ Allow public insert for new bookings
+- ✅ Allow select for availability checking
+- 🚫 Deny update and delete for unauthenticated users
+
 ## Screenshots
 
 ### 🏠 Home Page
@@ -40,6 +55,12 @@ A modern, responsive React application for restaurant table reservations with a 
 - **Tailwind CSS**: Utility-first CSS framework for styling
 - **Lucide React**: Icon library for UI elements
 - **JavaScript**: ES6+ features and modern syntax
+- **Supabase**: Backend-as-a-service for data storage, authentication, and row-level security
 
 ## About
-Built as part of the Meta Front-End Developer Specialization on Coursera, demonstrating proficiency in modern React development practices.
+
+This is a full-stack restaurant reservation system built with React and Supabase, featuring real-time booking validation, secure backend policies, and a polished, responsive UI.
+
+Originally developed as part of the Meta Front-End Developer Specialization on Coursera, the project has since been extended to include a production-ready backend using Supabase with row-level security (RLS) and live availability checking.
+
+It demonstrates modern frontend and backend integration, clean UX patterns, and real-world data handling for portfolio and freelance use.
